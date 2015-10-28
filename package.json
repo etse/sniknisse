@@ -1,0 +1,23 @@
+{
+  "name": "sniknisse",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "postinstall": "gulp"
+  },
+  "dependencies": {
+    "angular2": "2.0.0-alpha.44",
+    "body-parser": "^1.14.1",
+    "debug": "^2.2.0",
+    "express": "^4.13.3",
+    "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-typescript": "^2.9.2",
+    "morgan": "^1.6.1",
+    "systemjs": "^0.16.8",
+    "typescript": "^1.6.2"
+  }
+}
