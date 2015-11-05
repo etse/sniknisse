@@ -7,8 +7,9 @@
     "postinstall": "gulp"
   },
   "dependencies": {
-    "angular2": "2.0.0-alpha.44",
+    "angular2": "^2.0.0-alpha.45",
     "body-parser": "^1.14.1",
+    "bootstrap": "^3.3.5",
     "debug": "^2.2.0",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
@@ -16,6 +17,8 @@
     "gulp-concat": "^2.6.0",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-typescript": "^2.9.2",
+    "gulp-uglify": "^1.4.2",
+    "jquery": "^2.1.4",
     "morgan": "^1.6.1",
     "systemjs": "^0.16.8",
     "typescript": "^1.6.2"

@@ -4,11 +4,15 @@ var concat = require('gulp-concat');
 var clean = require('gulp-clean');
 var ts = require('gulp-typescript');
 var typescript = require('typescript');
+var uglify = require('gulp-uglify');
 
 var src = 'src';
 var dest = 'static';
 
 var css = [
+    'node_modules/bootstrap/dist/css/bootstrap.min.css',
+    'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
+    src + '/**/*.css'
 ];
 
 var copy = [
@@ -19,7 +23,9 @@ var copy = [
 var vendors = [
     'node_modules/angular2/bundles/angular2.dev.js',
     'node_modules/angular2/bundles/router.dev.js',
-    'node_modules/angular2/bundles/http.dev.js'
+    'node_modules/angular2/bundles/http.dev.js',
+    'node_modules/jquery/dist/jquery.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js'
 ];
 
 gulp.task('clean', function () {
@@ -53,6 +59,7 @@ gulp.task('css', function() {
 gulp.task('vendors', function() {
     return gulp.src(vendors)
         .pipe(concat('vendors.js'))
+        .pipe(uglify())
         .pipe(gulp.dest(dest + '/vendors'));
 });
 
@@ -74,6 +81,7 @@ gulp.task('build', ['clean'], function(){
 gulp.task('watch', ["build"], function() {
     gulp.watch(src + '/**/*.ts', ['typescript']);
     gulp.watch(src + '/**/*.html', ['templates']);
+    gulp.watch(src + '/**/*.css', ['css'])
 });
 
 gulp.task('default', ["clean"], function() {

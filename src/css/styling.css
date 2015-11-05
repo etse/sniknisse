@@ -1,0 +1,19 @@
+body {
+    background: #faebd7;
+}
+
+.container-hoved {
+    background: #A32C28;
+    box-shadow: 10px 10px 5px #3c3c3c;
+    border-radius: 0.5rem;
+    color: #fffaf0;
+    margin-top: 0.5rem;
+    padding: 1rem 4rem 3rem 4rem;
+}
+
+/* Desktop only */
+@media(min-width: 768px) {
+    .container-hoved {
+        margin-top: 2rem;
+    }
+}
