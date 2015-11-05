@@ -1,5 +1,5 @@
 import { Component, View, bootstrap, provide, Inject } from 'angular2/angular2';
-import { HTTP_PROVIDERS } from 'angular2/http';
+import { HTTP_PROVIDERS, Http } from 'angular2/http';
 import { 
     ROUTER_PROVIDERS,
     ROUTER_DIRECTIVES, 
@@ -9,6 +9,7 @@ import {
 } from 'angular2/router';
 
 import { Introduction } from '../introduction/introduction';
+import {Backend} from "../../services/backend";
 
 @Component({
 	selector: 'nisse-app'
@@ -21,7 +22,9 @@ import { Introduction } from '../introduction/introduction';
     { path: '/', component: Introduction, as: 'Intro' }
 ])
 class App {	
-	constructor() {
+	constructor(@Inject(Http) http: Http) {
+        const backend:Backend = new Backend(http);
+        backend.customObservable().toRx().subscribe((value) => console.log(value));
 	}
 }
 
