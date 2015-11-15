@@ -1,1 +1,10 @@
-// Create tables here
+#DB named "sniknise"
+
+CREATE TABLE users(
+    id serial primary key,
+    nissebarn integer references users(id),
+    name varchar(200), 
+    email varchar(200), 
+    password varchar(200), 
+    onsker TEXT
+);
