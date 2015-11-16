@@ -1,6 +1,5 @@
 import { Component, View, Inject, NgFor } from 'angular2/angular2';
 import { Http } from 'angular2/http';
-
 import { Backend } from '../services/backend';
 
 @Component({
@@ -22,9 +21,10 @@ export class ListRegistered {
     constructor(@Inject(Http) http) {
         this.backend = new Backend(http);
         this.backend.getAllUsers().subscribe(response => {
-            if(response.status === 200) {
+            if(response.ok) {
                 this.users = response.json();
-                console.log(this.users);
+            } else {
+                console.error(response);
             }
         });
     }
