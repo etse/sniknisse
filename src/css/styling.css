@@ -1,14 +1,26 @@
 body {
     background: #faebd7;
+    font-family: 'Comic sans MS';
+    font-size: 1.75rem;
+}
+
+h1 {
+    font-size: 5rem;
+    margin-bottom: 2.5rem;
+}
+
+a, a:hover, a:visited {
+    color: 2A8FBD;
 }
 
 .container-hoved {
     background: #A32C28;
-    box-shadow: 10px 10px 5px #3c3c3c;
-    border-radius: 0.5rem;
     color: #fffaf0;
-    margin-top: 0.5rem;
-    padding: 1rem 4rem 3rem 4rem;
+    padding: 1.5rem 3rem 4rem 3rem;
+}
+
+.container-inline {
+    display: inline-block;
 }
 
 input, button {
@@ -23,5 +35,8 @@ input, button {
 @media(min-width: 768px) {
     .container-hoved {
         margin-top: 2rem;
+        padding: 2rem 6rem 5rem 6rem;
+        border-radius: 0.75rem;
+        box-shadow: 10px 10px 5px #3c3c3c;
     }
 }

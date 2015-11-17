@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
+var minify = require('gulp-minify-css');
 var clean = require('gulp-clean');
 var ts = require('gulp-typescript');
 var typescript = require('typescript');
@@ -52,6 +53,7 @@ gulp.task('copy', function() {
 
 gulp.task('css', function() {
     return gulp.src(css)
+        .pipe(minify())
         .pipe(concat('styling.css'))
         .pipe(gulp.dest(dest));
 });
