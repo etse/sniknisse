@@ -19,7 +19,7 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
             ikke vite hvem som kjøpte gave til dem.
         </p>
         
-        <h2>Prosessen vil skje på følgende møte:</h2>
+        <h2>Prosessen vil skje på følgende måte:</h2>
         <ol class="blokk-xl">
             <li>Folk melder seg på innen søndag 29. november</li>
             <li>Mandag 30. november blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>

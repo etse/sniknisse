@@ -1,4 +1,4 @@
-import { Component, View, Inject, NgFor } from 'angular2/angular2';
+import { Component, View, Inject, NgFor, NgIf } from 'angular2/angular2';
 import { Http } from 'angular2/http';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 import { Backend } from '../services/backend';
@@ -10,7 +10,7 @@ import { Backend } from '../services/backend';
     directives: [NgFor, ROUTER_DIRECTIVES],
     template: `
         <div class="container-inline">
-            <h2 class="blokk-m">Vi har X personer påmeldt</h2>
+            <h2 *ng-if="harPaameldte()" class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-xl">
                 <li *ng-for="#user of users">{{user.name}}</li>
             </ul>
@@ -38,6 +38,6 @@ export class ListRegistered {
     }
     
     harPaameldte() :Boolean {
-        return this.users !== null && this.users.length > 0;
+        return this.users != null && this.users.length > 0;
     }
 }

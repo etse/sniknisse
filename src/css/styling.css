@@ -1,6 +1,6 @@
 body {
     background: #faebd7;
-    font-family: 'Comic sans MS';
+    font-family: 'Comic Sans MS';
     font-size: 1.75rem;
 }
 
@@ -10,7 +10,11 @@ h1 {
 }
 
 a, a:hover, a:visited {
-    color: 2A8FBD;
+    color: #4CE8ED;
+}
+
+label {
+    font-size: 1.5rem;
 }
 
 .container-hoved {
@@ -23,12 +27,39 @@ a, a:hover, a:visited {
     display: inline-block;
 }
 
-input, button {
+.knapp-submit {
+    transition: ease-in 200ms;
+    background: #cbcbcb;
+}
+
+.knapp-submit:hover:not(:disabled) {
+    background: #ababab;
+}
+
+input, button, textarea {
     color: #3c3c3c;
-    border-radius: 0.3rem;
+    border-radius: 0.5rem;
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
     display: block;
-    width: 20rem;
+    width: 100%;
     margin-bottom: 0.5rem;
+}
+
+button:disabled {
+    background: #8b8b8b;
+}
+
+.ng-invalid {
+    border: 3px solid red;
+}
+
+.ng-valid {
+    border: 3px solid limegreen;
+}
+
+textarea {
+    height: 10rem;
 }
 
 /* Desktop only */
@@ -38,5 +69,9 @@ input, button {
         padding: 2rem 6rem 5rem 6rem;
         border-radius: 0.75rem;
         box-shadow: 10px 10px 5px #3c3c3c;
+    }
+    
+    input, button, textarea {
+        width: 40rem;
     }
 }
