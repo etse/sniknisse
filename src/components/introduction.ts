@@ -27,8 +27,8 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
             <li>Man ordner en gave til en verdi rundt 100-150 kroner</li>
             <li>Pakken skal selvfølgelig pakkes inn, husk å skrive på hvem
                 pakken er til, og sett "sniknissen" i frafeltet</li>
-            <li>Pakkene leveres inn til meg senest <strong>torsdag 10. desember</strong></li>
-            <li>Utleveringen skjer fredag 11. desember</li>
+            <li>Pakkene leveres inn til meg senest <strong>onsdag 9. desember</strong></li>
+            <li>Utleveringen skjer torsdag 10. desember, etter prosjektlunsjen</li>
         </ol>
         
         <div class="text-center">
