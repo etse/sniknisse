@@ -10,32 +10,35 @@ import { Backend } from '../services/backend';
 @View({
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     template: `
-        <form (submit)="register($event)" [ng-form-model]="registerForm" novaldiate >
-            <div class="blokk-s">
-                <label for="name">Ditt navn:</label>
-                <input id="name" ng-control="name" type="text" placeholder="Ditt navn" />
-            </div>
-            <div class="blokk-s">
-                <label for="email">Din epost:</label>
-                <input id="email" ng-control="email" type="text" placeholder="navn@bekk.no" />
-            </div>            
-            <div class="blokk-s">
-                <label for="password1">Velg et passord:</label>
-                <input id="password1" ng-control="password1" type="password" placeholder="Passord" />
-            </div>
-            <div class="blokk-s">
-                <label for="password2">Gjenta passordet:</label>
-                <input id="password2" ng-control="password2" type="password" placeholder="Gjenta passord" />
-            </div>
-            <div class="blokk-m">
-                <label for="onsker">Tips til sniknissen:</label>
-                <textarea id="onsker" ng-control="onsker" placeholder="Her kan du komme med tips..."></textarea>
-            </div>
-            <div class="text-center container-inline">
-                <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
-                <p><a [router-link]="['/Intro']">Avbryt</a></p>
-            </div>
-        </form>
+        <div class="container">
+            <img class="image-right hidden-mobile" src="./images/santa.png" />
+            <form (submit)="register($event)" [ng-form-model]="registerForm" novaldiate >
+                <div class="blokk-s">
+                    <label for="name">Ditt navn:</label>
+                    <input id="name" ng-control="name" type="text" placeholder="Ditt navn" />
+                </div>
+                <div class="blokk-s">
+                    <label for="email">Din epost:</label>
+                    <input id="email" ng-control="email" type="text" placeholder="navn@bekk.no" />
+                </div>            
+                <div class="blokk-s">
+                    <label for="password1">Velg et passord:</label>
+                    <input id="password1" ng-control="password1" type="password" placeholder="Passord" />
+                </div>
+                <div class="blokk-s">
+                    <label for="password2">Gjenta passordet:</label>
+                    <input id="password2" ng-control="password2" type="password" placeholder="Gjenta passord" />
+                </div>
+                <div class="blokk-m">
+                    <label for="onsker">Tips til sniknissen:</label>
+                    <textarea id="onsker" ng-control="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                </div>
+                <div class="text-center container-inline">
+                    <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
+                    <p><a [router-link]="['/Intro']">Avbryt</a></p>
+                </div>
+            </form>
+        </div>
     `
 })
 export class RegistrationForm {

@@ -47,6 +47,11 @@ gulp.task('copy', function() {
         .pipe(gulp.dest(dest + '/vendors'));
 });
 
+gulp.task('copy-images', function(){
+    return gulp.src(src + '/images/**/*')
+        .pipe(gulp.dest(dest + '/images'));
+})
+
 gulp.task('css', function() {
     return gulp.src(css)
         .pipe(minify())
@@ -71,6 +76,7 @@ gulp.task('build', ['clean'], function(){
         'typescript',
         'vendors',
         'copy',
+        'copy-images',
         'templates',
         'css'
     ]);

@@ -9,7 +9,11 @@ import { Backend } from '../services/backend';
 @View({
     directives: [NgFor, ROUTER_DIRECTIVES],
     template: `
+        <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
+            <div class="text-center blokk-s" *ng-if="showSpinner">
+                <img class="text-center"  src='./images/spinner.gif' />
+            </div>
             <h2 *ng-if="harPaameldte()" class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-l">
                 <li *ng-for="#user of users">{{user.name}}</li>
@@ -24,13 +28,16 @@ import { Backend } from '../services/backend';
 })
 export class ListRegistered {
     users: any;
+    showSpinner: boolean;
     backend: Backend;
     
     constructor(@Inject(Http) http) {
         this.backend = new Backend(http);
+        this.showSpinner = true;
         this.backend.getAllUsers().subscribe(response => {
             if(response.status === 200) {
                 this.users = response.json();
+                this.showSpinner = false;
             } else {
                 console.error(response);
             }

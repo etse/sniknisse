@@ -19,7 +19,13 @@ a, a:hover, a:visited {
     color: #4CE8ED;
 }
 
+.container {
+    position: relative;
+    display: block;
+}
+
 .container-hoved {
+    position: relative;
     background: #A32C28;
     color: #fffaf0;
     width: 100%;
@@ -34,6 +40,13 @@ a, a:hover, a:visited {
 .knapp-submit {
     transition: ease-in 200ms;
     background: #cbcbcb;
+}
+
+.image-right {
+    position: absolute;
+    top: 40px;
+    right: 20px;
+    height: 400px;
 }
 
 .knapp-submit:hover:not(:disabled) {
