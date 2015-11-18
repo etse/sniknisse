@@ -18,7 +18,7 @@ var css = [
 
 var copy = [
     'node_modules/systemjs/dist/system.js',
-    'node_modules/systemjs/node_modules/es6-module-loader/dist/es6-module-loader.js'
+    'node_modules/es6-module-loader/dist/es6-module-loader.js'
 ];
 
 var vendors = [
