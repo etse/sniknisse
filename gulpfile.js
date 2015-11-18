@@ -11,8 +11,6 @@ var src = 'src';
 var dest = 'static';
 
 var css = [
-    'node_modules/bootstrap/dist/css/bootstrap.min.css',
-    'node_modules/bootstrap/dist/css/bootstrap-theme.min.css',
     src + '/**/*.css'
 ];
 
@@ -24,9 +22,7 @@ var copy = [
 var vendors = [
     'node_modules/angular2/bundles/angular2.dev.js',
     'node_modules/angular2/bundles/router.dev.js',
-    'node_modules/angular2/bundles/http.dev.js',
-    'node_modules/jquery/dist/jquery.min.js',
-    'node_modules/bootstrap/dist/js/bootstrap.min.js'
+    'node_modules/angular2/bundles/http.dev.js'
 ];
 
 gulp.task('clean', function () {

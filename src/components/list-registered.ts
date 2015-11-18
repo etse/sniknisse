@@ -11,12 +11,12 @@ import { Backend } from '../services/backend';
     template: `
         <div class="container-inline">
             <h2 *ng-if="harPaameldte()" class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
-            <ul class="blokk-xl">
+            <ul class="blokk-l">
                 <li *ng-for="#user of users">{{user.name}}</li>
             </ul>
             
             <div class="text-center">
-                <p><a [router-link]="['/Registration']" class="button-snow">Meld deg på</a></p>
+                <p><a [router-link]="['/Registration']" class="button-snow knapp-liten">Meld deg på</a></p>
                 <p><a [router-link]="['/Intro']">Tilbake til forrsiden</a></p>
             </div>
         </div>

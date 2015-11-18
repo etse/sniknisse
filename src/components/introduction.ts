@@ -32,7 +32,7 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
         </ol>
         
         <div class="text-center">
-            <p><a [router-link]="['/Registration']" class="button-snow">Meld deg på</a></p>
+            <p><a [router-link]="['/Registration']" class="button-snow knapp-stor">Meld deg på</a></p>
             <p><a [router-link]="['/ListRegistered']">Se hvem som har meldt seg på</a></p>
         </p>
     `
