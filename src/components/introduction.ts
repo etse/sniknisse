@@ -9,13 +9,13 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
     template: `
         <p class="blokk-m">
             Nå begynner vi å nærme oss jul, og ingen ordentlig jul uten en
-            sniknisse. Og i den ammenheng tenkte jeg å ta på meg ansvaret
+            sniknisse. Og i den sammenheng tenkte jeg å ta på meg ansvaret
             for å arrangere et event for de av oss i BEKK som jobber hos NAV.
         </p>
         <p class="blokk-l">
             Sniknisse er en vestlig tradisjon hvor en gruppe mennesker går
             sammen og avtaler at de skal kjøpe gaver til hverandre. Hvem du
-            skal kjøpe blir gave til blir valgt tilfeldig – og mottakeren skal
+            skal kjøpe gave til blir valgt tilfeldig – og mottakeren skal
             ikke vite hvem som kjøpte gave til dem.
         </p>
         
