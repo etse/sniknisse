@@ -2,7 +2,7 @@ var pg = require('pg');
 var dbpath = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/sniknisse';
 
 exports.getAllUsers = function(success, error) {
-    doQuery("SELECT * FROM users;", null, success, error);
+    doQuery("SELECT name, email, onsker FROM users;", null, success, error);
 };
 
 exports.createUser = function(name, email, password, onsker, success, error) {
