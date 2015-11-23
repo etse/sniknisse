@@ -21,7 +21,7 @@ import { Backend } from '../services/backend';
             
             <div class="text-center">
                 <p><a [router-link]="['/Registration']" class="button-snow knapp-liten">Meld deg på</a></p>
-                <p><a [router-link]="['/Intro']">Tilbake til forrsiden</a></p>
+                <p><a [router-link]="['/Intro']">Tilbake til forsiden</a></p>
             </div>
         </div>
     `
