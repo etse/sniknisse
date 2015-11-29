@@ -15,11 +15,47 @@ router.get('/users', function (request, response, error) {
 });
 
 router.get('/nissebarn', function(request, response, error) {
-    db.getNissebarn(1, onSuccess, error);
+    var key = request.get('X-AUTH-TOKEN');
+    if(key in sessions) {
+        db.getNissebarn(sessions[key].id, onSuccess, error);
+    } else {
+        response.status(403);
+        response.json({message: 'Please log in'});
+    }
     
     function onSuccess(result) {
-        response.json(result.rows);
+        if(result.rows.length == 0) {
+            response.status(204);
+            response.json({'message': 'Not assigned'});
+        } else {
+            response.json(result.rows[0]);
+        }
     }    
+});
+
+router.get('/onsker', function(request, response, error) {
+    var key = request.get('X-AUTH-TOKEN');
+    if(key in sessions) {
+        response.json({'onsker': sessions[key]['onsker']});
+    } else {
+        response.status(403);
+        response.json({message: 'Please log in'});
+    }
+});
+
+router.post('/onsker', function(request, response, error) {
+    var key = request.get('X-AUTH-TOKEN');
+    if(key in sessions) {
+        db.updateOnsker(sessions[key].id, request.body.onsker, onSuccess, error);
+    } else {
+        response.status(403);
+        response.json({message: 'Please log in'});
+    }
+
+    function onSuccess(result) {
+        sessions[key]['onsker'] = request.body.onsker;
+        response.json({message: 'updated'});
+    }
 });
 
 router.post('/login', function(request, response, error) {

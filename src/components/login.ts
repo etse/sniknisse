@@ -52,7 +52,7 @@ export class Login {
             let email = this.loginForm.controls['email'].value;
             let password = this.loginForm.controls['password'].value;
             this.backend.login(email, password).subscribe(response => {
-                if(response.status === 200) {
+                if (response.status === 200) {
                     this.router.navigate(['/Profile']);
                 } else {
                     this.hasError = true;
