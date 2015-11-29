@@ -68,10 +68,11 @@ router.get('/nissebarn', function(request, response, error) {
 router.post('/nissebarn', function(request, response, error) {
     var key = request.get('X-AUTH-TOKEN');
     if(isLoggedInAsAdmin(key)) {
-        if(sessions[key].nissebarn != null) {
+        var nissebarn = sessions[key].nissebarn;
+        if(nissebarn != null && nissebarn != "null") {
             db.getAllUsersUnfiltered(onHentetAlleBrukere, error);
         } else {
-            response.json({message: "Already assigned: you are assigned to " + sessions[key].nissebarn}); 
+            response.json({message: "Already assigned"}); 
         }
     } else {
         response.status(403);
