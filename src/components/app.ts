@@ -1,4 +1,4 @@
-import { Component, View, bootstrap, provide, Inject } from 'angular2/angular2';
+import { Component, View, bootstrap, provide } from 'angular2/angular2';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { 
     ROUTER_PROVIDERS,
@@ -11,6 +11,8 @@ import {
 import { Introduction } from './introduction';
 import { ListRegistered } from './list-registered';
 import { RegistrationForm } from './registration-form';
+import { Profile } from "./profile";
+import { Login } from "./login";
 
 @Component({
 	selector: 'nisse-app'
@@ -26,9 +28,8 @@ import { RegistrationForm } from './registration-form';
 })
 @RouteConfig([
     { path: '/', component: Introduction, as: 'Intro' },
-    { path: '/registrerte', component: ListRegistered, as: 'ListRegistered' },
-    { path: '/registrer', component: RegistrationForm, as: 'Registration' }
-    
+    { path: '/profile', component: Profile, as: 'Profile' },
+    { path: '/login', component: Login, as: 'Login' }
 ])
 class App {	
 	constructor() {

@@ -12,9 +12,9 @@ import { Backend } from '../services/backend';
         <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
             <div class="text-center blokk-s" *ng-if="showSpinner">
-                <img class="text-center"  src='./images/spinner.gif' />
+                <img class="text-center" src='./images/spinner.gif' />
             </div>
-            <h2 *ng-if="harPaameldte()" class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
+            <h2 class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-l">
                 <li *ng-for="#user of users">{{user.name}}</li>
             </ul>
@@ -42,9 +42,5 @@ export class ListRegistered {
                 console.error(response);
             }
         });
-    }
-    
-    harPaameldte() :Boolean {
-        return this.users != null && this.users.length > 0;
     }
 }
