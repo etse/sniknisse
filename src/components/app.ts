@@ -13,6 +13,7 @@ import { ListRegistered } from './list-registered';
 import { RegistrationForm } from './registration-form';
 import { Profile } from "./profile";
 import { Login } from "./login";
+import { Admin } from "./admin";
 
 @Component({
 	selector: 'nisse-app'
@@ -29,7 +30,8 @@ import { Login } from "./login";
 @RouteConfig([
     { path: '/', component: Introduction, as: 'Intro' },
     { path: '/profile', component: Profile, as: 'Profile' },
-    { path: '/login', component: Login, as: 'Login' }
+    { path: '/login', component: Login, as: 'Login' },
+    { path: '/admin', component: Admin, as: 'Admin' }
 ])
 class App {	
 	constructor() {

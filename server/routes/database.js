@@ -5,12 +5,24 @@ exports.getAllUsers = function(success, error) {
     doQuery("SELECT name, email, onsker FROM users;", null, success, error);
 };
 
+exports.getAllUsersUnfiltered = function(success, error) {
+    doQuery("SELECT * FROM users;", null, success, error);
+}
+
+exports.settLevert = function(userId, status, success, error) {
+    doQuery("UPDATE users SET harlevert=$2 WHERE id=$1", [userId, status], success, error);
+}
+
 exports.getUser = function(email, success, error) {
     doQuery("SELECT * FROM users WHERE email=$1", [email], success, error);
 }
 
 exports.updateOnsker = function(userId, onsker, success, error) {
     doQuery("UPDATE users SET onsker=$2 WHERE id=$1", [userId, onsker], success, error);
+}
+
+exports.updateNissebarn = function(userId, nissebarnId, success, error) {
+    doQuery("UPDATE users SET nissebarn=$2 WHERE id=$1", [userId, nissebarnId], success, error);
 }
 
 exports.getNissebarn = function(userid, success, error) {

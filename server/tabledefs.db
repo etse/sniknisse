@@ -6,5 +6,6 @@ CREATE TABLE users(
     name varchar(200), 
     email varchar(200), 
     password varchar(200), 
+    harlevert boolean NOT NULL DEFAULT false,
     onsker TEXT
 );

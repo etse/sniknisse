@@ -6,7 +6,9 @@ export class Backend {
     }
 
     public getAllUsers(): Observable<Response> {
-        return this.http.get('/api/users');
+        var headers = new Headers();
+        headers.append('X-AUTH-TOKEN', localStorage.getItem('auth-token'));
+        return this.http.get('/api/users', {headers: headers});
     }
     
     public createNewUser(name:String, email:String, password:String, onsker:String): Observable<Response> {
@@ -31,20 +33,20 @@ export class Backend {
         return this.getAuthResource('/api/onsker');
     }
 
-    public updateOnsker(onsker: string): Observable<Response> {
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        headers.append('X-AUTH-TOKEN', localStorage.getItem('auth-token'));
-        var body = JSON.stringify({onsker: onsker});
+    public settLevert(userid, status): Observable<Response> {
+        var body = JSON.stringify({ levert: status });
+        return this.postAuthResource('/api/users/' + userid, body);
+    }
 
-        return new Observable<Response>(observer => {
-            this.http.post('/api/onsker', body, { headers: headers }).subscribe(response => {
-                if (response.status === 403) {
-                    localStorage.removeItem('auth-token');
-                }
-                observer.next(response);
-            });
-        });
+    public delUtNissebarn(): Observable<Response> {
+        var headers = new Headers();
+        headers.append('X-AUTH-TOKEN', localStorage.getItem('auth-token'));
+        return this.http.post('/api/nissebarn', null, { headers: headers });
+    }
+
+    public updateOnsker(onsker: string): Observable<Response> {
+        var body = JSON.stringify({onsker: onsker});
+        return this.postAuthResource('/api/onsker', body);;
     }
     
     public isLoggedIn(): boolean {
@@ -68,6 +70,21 @@ export class Backend {
             this.http.post('/api/login', body, { headers: headers }).subscribe(response => {
                 if (response.status === 200) {
                     localStorage.setItem('auth-token', response.json()['auth-token']);
+                }
+                observer.next(response);
+            });
+        });
+    }
+
+    private postAuthResource(resourceUrl, body): Observable<Response> {
+        var headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        headers.append('X-AUTH-TOKEN', localStorage.getItem('auth-token'));
+
+        return new Observable<Response>(observer => {
+            this.http.post(resourceUrl, body, { headers: headers }).subscribe(response => {
+                if (response.status === 403) {
+                    localStorage.removeItem('auth-token');
                 }
                 observer.next(response);
             });

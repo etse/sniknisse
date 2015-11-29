@@ -9,8 +9,8 @@
   "dependencies": {
     "angular2": "^2.0.0-alpha.46",
     "body-parser": "^1.14.1",
-    "es6-module-loader": "^0.16.6",
     "debug": "^2.2.0",
+    "es6-module-loader": "^0.16.6",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
     "gulp-clean": "^0.3.1",
@@ -22,6 +22,8 @@
     "morgan": "^1.6.1",
     "password-hash": "^1.2.2",
     "pg": "^4.4.3",
+    "q": "^1.4.1",
+    "shuffle-array": "^0.1.0",
     "systemjs": "^0.16.8",
     "typescript": "^1.6.2"
   }
