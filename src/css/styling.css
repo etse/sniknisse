@@ -27,6 +27,7 @@ a, a:hover, a:visited {
 .container-hoved {
     position: relative;
     background: #A32C28;
+    min-height: 370px;
     color: #fffaf0;
     width: 100%;
     box-sizing: border-box;
@@ -46,7 +47,7 @@ a, a:hover, a:visited {
     position: absolute;
     top: 40px;
     right: 20px;
-    height: 400px;
+    height: 300px;
 }
 
 .knapp-submit:hover:not(:disabled) {

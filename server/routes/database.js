@@ -5,6 +5,18 @@ exports.getAllUsers = function(success, error) {
     doQuery("SELECT name, email, onsker FROM users;", null, success, error);
 };
 
+exports.getUser = function(email, success, error) {
+    doQuery("SELECT * FROM users WHERE email=$1", [email], success, error);
+}
+
+exports.updateOnsker = function(userId, onsker, success, error) {
+    doQuery("UPDATE users SET onsker=$2 WHERE id=$1", [userId, onsker], success, error);
+}
+
+exports.getNissebarn = function(userid, success, error) {
+    doQuery("SELECT name, onsker FROM users WHERE id=(SELECT nissebarn FROM users WHERE id=$1)", [userid], success, error);
+}
+
 exports.createUser = function(name, email, password, onsker, success, error) {
     doQuery("INSERT INTO users(name, email, password, onsker) VALUES ($1, $2, $3, $4);", 
         [name, email, password, onsker], success, error);

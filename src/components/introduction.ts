@@ -1,4 +1,4 @@
-import {Component, View} from 'angular2/angular2';
+import { Component, View } from 'angular2/angular2';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
 
 @Component({
@@ -32,8 +32,7 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
         </ol>
         
         <div class="text-center">
-            <p><a [router-link]="['/Registration']" class="button-snow knapp-stor">Meld deg på</a></p>
-            <p><a [router-link]="['/ListRegistered']">Se hvem som har meldt seg på</a></p>
+            <p><a [router-link]="['/Login']" class="button-snow knapp-stor">Logg inn</a></p>
         </p>
     `
 })
