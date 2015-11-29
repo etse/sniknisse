@@ -71,7 +71,7 @@ router.post('/nissebarn', function(request, response, error) {
         if(sessions[key].nissebarn != null) {
             db.getAllUsersUnfiltered(onHentetAlleBrukere, error);
         } else {
-            response.json({message: "Already assigned"}); 
+            response.json({message: "Already assigned: you are assigned to " + sessions[key].nissebarn}); 
         }
     } else {
         response.status(403);
