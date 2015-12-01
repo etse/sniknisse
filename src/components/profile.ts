@@ -16,7 +16,11 @@ import { Backend } from "../services/backend";
             </div>
 
             <div class="blokk-l">
-                <p *ng-if="!harNissebarn()">Du har ikke blitt tildelt et nissebarn enda. Kom tilbake senere...</p>
+                <p *ng-if="!harNissebarn()">
+                    Du har ikke blitt tildelt et nissebarn. Dette er trolig fordi du registrerte
+                    deg etter fristen. Ta kontakt med Steffen, så vil han prøve å få ordnet så
+                    også du kan bli med.
+                </p>
                 <div *ng-if="harNissebarn()">
                     <p>Du har blitt tildelt <em>{{nissebarn.name}}</em> som ditt nissebarn.</p>
                     <p>Tips: <em>{{nissebarn.onsker}}</em></p>
