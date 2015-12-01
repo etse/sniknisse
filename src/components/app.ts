@@ -31,6 +31,8 @@ import { Admin } from "./admin";
     { path: '/', component: Introduction, as: 'Intro' },
     { path: '/profile', component: Profile, as: 'Profile' },
     { path: '/login', component: Login, as: 'Login' },
+    { path: '/register', component: RegistrationForm, as: 'Registration' },
+    { path: '/registrerte', component: ListRegistered, as: 'ListRegistered' },
     { path: '/admin', component: Admin, as: 'Admin' }
 ])
 class App {	

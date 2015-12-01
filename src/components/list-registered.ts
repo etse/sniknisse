@@ -33,6 +33,7 @@ export class ListRegistered {
     
     constructor(@Inject(Http) http) {
         this.backend = new Backend(http);
+        this.users = [];
         this.showSpinner = true;
         this.backend.getAllUsers().subscribe(response => {
             if(response.status === 200) {
