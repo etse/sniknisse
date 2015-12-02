@@ -1,12 +1,13 @@
 body {
     background: #faebd7;
-    font-family: 'Comic Sans MS';
+    font-family: Tahoma, Georgia, Verdana, Arial;
     font-size: 1.25rem;
 }
 
 h1 {
     font-size: 3rem;
     margin-top: 0;
+    font-family: 'Comic sans MS';
     margin-bottom: 1.25rem;
 }
 
