@@ -23,7 +23,10 @@ import { Backend } from "../services/backend";
                 </p>
                 <div *ng-if="harNissebarn()">
                     <p>Du har blitt tildelt <em>{{nissebarn.name}}</em> som ditt nissebarn.</p>
-                    <p>Tips: <em>{{nissebarn.onsker}}</em></p>
+                    <p>Tips:
+                        <em *ng-if="harNissebarnMedOnsker()">{{nissebarn.onsker}}</em>
+                        <em *ng-if="!harNissebarnMedOnsker()">Ditt nissebarn har ikke skrevet inn noen ønsker enda :(</em>
+                    </p>
                 </div>
             </div>
             <div>
@@ -80,6 +83,10 @@ export class Profile {
 
     harNissebarn(): boolean {
         return this.nissebarn != null;
+    }
+
+    harNissebarnMedOnsker(): boolean {
+        return this.nissebarn != null && this.nissebarn.onsker != "";
     }
 
     endreOnske() {
