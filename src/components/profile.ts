@@ -32,7 +32,7 @@ import { Backend } from "../services/backend";
             <div>
                 <form (submit)="endreOnske($event)" [ng-form-model]="endreForm" novaldiate >
                     <div class="blokk-m">
-                        <label for="onsker">Endre tips til din sniknisse:</label>
+                        <label for="onsker">Din ønskeliste:</label>
                         <textarea id="onsker" ng-control="onsker" [value]="onsker" placeholder="Her kan du komme med tips..."></textarea>
                     </div>
                     <div class="text-center container-inline">
