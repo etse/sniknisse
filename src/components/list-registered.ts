@@ -1,27 +1,26 @@
-import { Component, View, Inject, NgFor, NgIf } from 'angular2/angular2';
+import { Component } from 'angular2/core';
 import { Http } from 'angular2/http';
 import { ROUTER_DIRECTIVES } from 'angular2/router';
+import {NgFor} from "angular2/common";
 import { Backend } from '../services/backend';
 
 @Component({
-    selector: 'nisse-list-registered'
-})
-@View({
+    selector: 'nisse-list-registered',
     directives: [NgFor, ROUTER_DIRECTIVES],
     template: `
         <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
-            <div class="text-center blokk-s" *ng-if="showSpinner">
+            <div class="text-center blokk-s" *ngIf="showSpinner">
                 <img class="text-center" src='./images/spinner.gif' />
             </div>
             <h2 class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-l">
-                <li *ng-for="#user of users">{{user.name}}</li>
+                <li *ngFor="#user of users">{{user.name}}</li>
             </ul>
             
             <div class="text-center">
-                <p><a [router-link]="['/Registration']" class="button-snow knapp-liten">Meld deg på</a></p>
-                <p><a [router-link]="['/Intro']">Tilbake til forsiden</a></p>
+                <p><a [routerLink]="['/Registration']" class="button-snow knapp-liten">Meld deg på</a></p>
+                <p><a [routerLink]="['/Intro']">Tilbake til forsiden</a></p>
             </div>
         </div>
     `
@@ -31,7 +30,7 @@ export class ListRegistered {
     showSpinner: boolean;
     backend: Backend;
     
-    constructor(@Inject(Http) http) {
+    constructor(http:Http) {
         this.backend = new Backend(http);
         this.users = [];
         this.showSpinner = true;

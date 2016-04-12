@@ -1,39 +1,37 @@
-import { Component, View, Inject } from 'angular2/angular2';
-import { ControlGroup, Control, FORM_DIRECTIVES, FORM_BINDINGS } from 'angular2/angular2';
 import { Router } from 'angular2/router';
 import { Http } from 'angular2/http';
 import { Backend } from "../services/backend";
+import {Component, Inject} from "angular2/core";
+import {ControlGroup, Control} from "angular2/common";
 
 @Component({
-    selector: 'nisse-profile'
-})
-@View({
+    selector: 'nisse-profile',
     template: `
         <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
-            <div class="text-center blokk-s" *ng-if="showSpinner">
+            <div class="text-center blokk-s" *ngIf="showSpinner">
                 <img class="text-center" src='./images/spinner.gif' />
             </div>
 
             <div class="blokk-l">
-                <p *ng-if="!harNissebarn()">
+                <p *ngIf="!harNissebarn()">
                     Du har ikke blitt tildelt et nissebarn. Dette er trolig fordi du registrerte
                     deg etter fristen. Ta kontakt med Steffen, så vil han prøve å få ordnet så
                     også du kan bli med.
                 </p>
-                <div *ng-if="harNissebarn()">
+                <div *ngIf="harNissebarn()">
                     <p>Du har blitt tildelt <em>{{nissebarn.name}}</em> som ditt nissebarn.</p>
                     <p>Tips:
-                        <em *ng-if="harNissebarnMedOnsker()">{{nissebarn.onsker}}</em>
-                        <em *ng-if="!harNissebarnMedOnsker()">Ditt nissebarn har ikke skrevet inn noen ønsker enda :(</em>
+                        <em *ngIf="harNissebarnMedOnsker()">{{nissebarn.onsker}}</em>
+                        <em *ngIf="!harNissebarnMedOnsker()">Ditt nissebarn har ikke skrevet inn noen ønsker enda :(</em>
                     </p>
                 </div>
             </div>
             <div>
-                <form (submit)="endreOnske($event)" [ng-form-model]="endreForm" novaldiate >
+                <form (submit)="endreOnske($event)" [ngFormModel]="endreForm" novaldiate >
                     <div class="blokk-m">
                         <label for="onsker">Din ønskeliste:</label>
-                        <textarea id="onsker" ng-control="onsker" [value]="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                        <textarea id="onsker" ngControl="onsker" [value]="onsker" placeholder="Her kan du komme med tips..."></textarea>
                     </div>
                     <div class="text-center container-inline">
                         <button class="knapp-submit" type="submit" [disabled]="!endreForm.valid">Lagre</button>

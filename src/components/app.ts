@@ -1,11 +1,7 @@
-import { Component, View, bootstrap, provide } from 'angular2/angular2';
-import { HTTP_PROVIDERS } from 'angular2/http';
-import { 
-    ROUTER_PROVIDERS,
-    ROUTER_DIRECTIVES, 
+import {Component} from 'angular2/core';
+import {
+    ROUTER_DIRECTIVES,
     RouteConfig,
-    LocationStrategy,
-    HashLocationStrategy
 } from 'angular2/router';
 
 import { Introduction } from './introduction';
@@ -16,9 +12,7 @@ import { Login } from "./login";
 import { Admin } from "./admin";
 
 @Component({
-	selector: 'nisse-app'
-})
-@View({
+	selector: 'nisse-app',
     directives: [ROUTER_DIRECTIVES],
     template: `
         <div class="container container-hoved">
@@ -35,13 +29,7 @@ import { Admin } from "./admin";
     { path: '/registrerte', component: ListRegistered, as: 'ListRegistered' },
     { path: '/admin', component: Admin, as: 'Admin' }
 ])
-class App {	
+export class App {
 	constructor() {
 	}
 }
-
-bootstrap(App, [
-    ROUTER_PROVIDERS,
-    HTTP_PROVIDERS,
-    provide(LocationStrategy, {useClass: HashLocationStrategy})
-]);

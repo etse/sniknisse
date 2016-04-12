@@ -1,30 +1,28 @@
-import { Component, View, Inject, NgIf } from 'angular2/angular2';
-import { Validators, ControlGroup, Control, FORM_DIRECTIVES, FORM_BINDINGS } from 'angular2/angular2';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
 import { Http } from 'angular2/http';
 import { Backend } from "../services/backend";
+import {FORM_DIRECTIVES, NgIf, ControlGroup, Validators, Control} from "angular2/common";
+import {Component, Inject} from "angular2/core";
 
 @Component({
-    selector: 'nisse-login'
-})
-@View({
+    selector: 'nisse-login',
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, NgIf],
     template: `
         <img class="image-right hidden-mobile" src="./images/santa.png" />
         <div class="container">
-            <form (submit)="login($event)" [ng-form-model]="loginForm" novaldiate >
-                <p class="form-error" *ng-if="hasError">Ugyldig brukernavn eller passord</p>
+            <form (submit)="login($event)" [ngFormModel]="loginForm" novaldiate >
+                <p class="form-error" *ngIf="hasError">Ugyldig brukernavn eller passord</p>
                 <div class="blokk-s">
                     <label for="email">Din epost:</label>
-                    <input id="email" ng-control="email" type="text" placeholder="navn@bekk.no" />
+                    <input id="email" ngControl="email" type="text" placeholder="navn@bekk.no" />
                 </div>           
                 <div class="blokk-m">
                     <label for="password">Ditt passord:</label>
-                    <input id="password" ng-control="password" type="password" placeholder="Passord" />
+                    <input id="password" ngControl="password" type="password" placeholder="Passord" />
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!loginForm.valid || isLoggingIn">Logg inn</button>
-                    <a [router-link]="['/Intro']">Avbryt</a>
+                    <a [routerLink]="['/Intro']">Avbryt</a>
                 </div>
             </form>
         </div>
@@ -47,7 +45,7 @@ export class Login {
         });
     }
 
-    login(event: Event) {
+    login() {
         if(this.loginForm.valid) {
             let email = this.loginForm.controls['email'].value;
             let password = this.loginForm.controls['password'].value;

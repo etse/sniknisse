@@ -1,41 +1,40 @@
-import { Component, View, Inject } from 'angular2/angular2';
-import { Validators, ControlGroup, Control, FORM_DIRECTIVES, FORM_BINDINGS } from 'angular2/angular2';
+///<reference path="../../node_modules/angular2/src/common/forms/directives.d.ts"/>
 import { Http } from 'angular2/http';
 import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
 import { Backend } from '../services/backend';
+import {FORM_DIRECTIVES, ControlGroup, Validators, Control} from "angular2/common";
+import {Component} from "angular2/core";
 
 @Component({
-    selector: 'nisse-registration-form'
-})
-@View({
+    selector: 'nisse-registration-form',
     directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
     template: `
         <div class="container">
             <img class="image-right hidden-mobile" src="./images/santa.png" />
-            <form (submit)="register($event)" [ng-form-model]="registerForm" novaldiate >
+            <form (submit)="register($event)" [ngFormModel]="registerForm" novaldiate >
                 <div class="blokk-s">
                     <label for="name">Ditt navn:</label>
-                    <input id="name" ng-control="name" type="text" placeholder="Ditt navn" />
+                    <input id="name" ngControl="name" type="text" placeholder="Ditt navn" />
                 </div>
                 <div class="blokk-s">
                     <label for="email">Din epost:</label>
-                    <input id="email" ng-control="email" type="text" placeholder="navn@bekk.no" />
+                    <input id="email" ngControl="email" type="text" placeholder="navn@bekk.no" />
                 </div>            
                 <div class="blokk-s">
                     <label for="password1">Velg et passord:</label>
-                    <input id="password1" ng-control="password1" type="password" placeholder="Passord" />
+                    <input id="password1" ngControl="password1" type="password" placeholder="Passord" />
                 </div>
                 <div class="blokk-s">
                     <label for="password2">Gjenta passordet:</label>
-                    <input id="password2" ng-control="password2" type="password" placeholder="Gjenta passord" />
+                    <input id="password2" ngControl="password2" type="password" placeholder="Gjenta passord" />
                 </div>
                 <div class="blokk-m">
                     <label for="onsker">Tips til sniknissen:</label>
-                    <textarea id="onsker" ng-control="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                    <textarea id="onsker" ngControl="onsker" placeholder="Her kan du komme med tips..."></textarea>
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
-                    <p><a [router-link]="['/Intro']">Avbryt</a></p>
+                    <p><a [routerLink]="['/Intro']">Avbryt</a></p>
                 </div>
             </form>
         </div>
@@ -60,7 +59,7 @@ export class RegistrationForm {
         this.registerForm.controls['password2'].valueChanges.subscribe((value) => this.checkPasswordsEqual());
     }
     
-    public register(event: Event) {
+    public register() {
         if(this.registerForm.valid) {
             let name = this.registerForm.controls['name'].value;
             let email = this.registerForm.controls['email'].value;

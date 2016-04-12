@@ -1,94 +1,74 @@
-var gulp = require('gulp');
-var sourcemaps = require('gulp-sourcemaps');
-var concat = require('gulp-concat');
-var minify = require('gulp-minify-css');
-var clean = require('gulp-clean');
-var ts = require('gulp-typescript');
-var typescript = require('typescript');
-var uglify = require('gulp-uglify');
+const gulp = require('gulp');
+const del = require('del');
+const concat = require('gulp-concat');
+const minify = require('gulp-minify-css');
+const tsify = require('tsify');
+const browserify = require('browserify');
+const babelify = require('babelify');
+const source = require('vinyl-source-stream');
 
-var src = 'src';
-var dest = 'static';
-
-var css = [
-    src + '/**/*.css'
-];
-
-var copy = [
-    'node_modules/systemjs/dist/system.js',
-    'node_modules/es6-module-loader/dist/es6-module-loader.js'
-];
-
-var vendors = [
-    'node_modules/angular2/bundles/angular2.dev.js',
-    'node_modules/angular2/bundles/router.dev.js',
-    'node_modules/angular2/bundles/http.dev.js'
-];
+const src = './src';
+const css = src + '/css/*.css';
+const dest = './static';
 
 gulp.task('clean', function () {
-    return gulp.src(dest, {read: false})
-        .pipe(clean());
+    return del('public/**/*');
 });
 
-gulp.task('typescript', function(){
-    var tsProject = ts.createProject('tsconfig.json', {
-        typescript: typescript
-    });
+gulp.task('build.vendors', function() {
+    return gulp.src([
+            'node_modules/angular2/bundles/angular2-polyfills.js',
+            'node_modules/reflect-metadata/Reflect.js'
+        ])
+        .pipe(concat('vendors.js'))
+        .pipe(gulp.dest(dest))
+});
 
-    return gulp.src(['typings/**/*.ts', src + '/**/*.ts'], { base: src })
-        .pipe(sourcemaps.init())
-        .pipe(ts(tsProject))
-        .pipe(sourcemaps.write())
+gulp.task('build.ts', function(){
+    return browserify(src + '/bootstrap.ts', {extensions: [".ts",".js"]})
+        .plugin('tsify', {target: 'es6', typescript: require('typescript')})
+        .transform(babelify, {extensions: [".ts",".js"], presets: ["es2015"]})
+        .bundle()
+        .on('error', function(error){
+            console.log("error:", error.message);
+            throw error;
+        })
+        .pipe(source('bundle.js'))
         .pipe(gulp.dest(dest));
+
 });
 
-gulp.task('copy', function() {
-    return gulp.src(copy)
-        .pipe(gulp.dest(dest + '/vendors'));
-});
-
-gulp.task('copy-images', function(){
-    return gulp.src(src + '/images/**/*')
-        .pipe(gulp.dest(dest + '/images'));
-})
-
-gulp.task('css', function() {
+gulp.task('build.css', function() {
     return gulp.src(css)
         .pipe(minify())
         .pipe(concat('styling.css'))
         .pipe(gulp.dest(dest));
 });
 
-gulp.task('vendors', function() {
-    return gulp.src(vendors)
-        .pipe(concat('vendors.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(dest + '/vendors'));
+gulp.task('copy.images', function(){
+    return gulp.src(src + '/images/**/*')
+        .pipe(gulp.dest(dest + '/images'));
 });
 
-gulp.task('templates', function(){
+
+gulp.task('build.templates', function(){
     return gulp.src(src + '/**/*.html')
         .pipe(gulp.dest(dest));
 });
 
-gulp.task('build', ['clean'], function(){
-    return gulp.start([
-        'typescript',
-        'vendors',
-        'copy',
-        'copy-images',
-        'templates',
-        'css'
+gulp.task('build', ['clean'], function () {
+    gulp.start([
+        'build.vendors',
+        'build.ts',
+        'build.css',
+        'copy.images',
+        'build.templates'
     ]);
 });
 
 gulp.task('watch', ["build"], function() {
-    gulp.watch(src + '/**/*.ts', ['typescript']);
-    gulp.watch(src + '/**/*.html', ['templates']);
-    gulp.watch(src + '/**/*.css', ['css'])
+    gulp.watch(src + '/**/*.ts', ['build.ts']);
+    gulp.watch(src + '/**/*.html', ['build.templates']);
 });
 
-gulp.task('default', ["clean"], function() {
-    gulp.start(["build"]);
-});
-
+gulp.task('default', ['build']);

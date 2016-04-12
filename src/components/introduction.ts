@@ -1,12 +1,10 @@
-import { Component, View } from 'angular2/angular2';
-import { ROUTER_DIRECTIVES } from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouterLink} from 'angular2/router';
+import {Component} from "angular2/core";
 
 @Component({
-	selector: 'nisse-introduction'
-})
-@View({
-    directives: [ROUTER_DIRECTIVES],
-    template: `
+	selector: 'nisse-introduction',
+	directives: [ROUTER_DIRECTIVES],
+	template: `
         <p class="blokk-m">
             Nå begynner vi å nærme oss jul, og ingen ordentlig jul uten en
             sniknisse. Og i den sammenheng tenkte jeg å ta på meg ansvaret
@@ -32,8 +30,8 @@ import { ROUTER_DIRECTIVES } from 'angular2/router';
         </ol>
         
         <div class="text-center">
-            <p><a [router-link]="['/Login']" class="button-snow knapp-stor">Logg inn</a></p>
-        </p>
+            <p><a [routerLink]="['/Login']" class="button-snow knapp-stor">Logg inn</a></p>
+        </div>
     `
 })
 export class Introduction {	

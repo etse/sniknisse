@@ -1,23 +1,27 @@
-import { Component, View, Inject } from 'angular2/angular2';
+import {Component} from 'angular2/core';
 import { Http } from 'angular2/http';
 import { Router } from 'angular2/router';
-import { Backend } from '../services/backend';
+import {Backend} from '../services/backend';
+
+export interface IUser {
+    id: number,
+    nissebarn: number,
+    harlevert: boolean
+}
 
 @Component({
-    selector: 'nisse-admin'
-})
-@View({
+    selector: 'nisse-admin',
     template: `
         <div class="container">
             <h2>Admin panel</h2>
-            <div *ng-if="!harTildeltNissebarn()">
+            <div *ngIf="!harTildeltNissebarn()">
                 <button (click)="tildelNissebarn()">Tildel nissebarn</button>
             </div>
 
-            <ul class="liste-klikkbar" *ng-if="harTildeltNissebarn()">
-                <li *ng-for="#user of users" (click)="toggleLevert(user)">
-                    <img *ng-if="user.harlevert" src="./images/checked.png" class="levert-icon" />
-                    <img *ng-if="!user.harlevert" src="./images/cross.png" class="levert-icon" />
+            <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
+                <li *ngFor="#user of users" (click)="toggleLevert(user)">
+                    <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
+                    <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
                     <span>{{user.name}}</span>
                 </li> 
             </ul>
@@ -26,7 +30,7 @@ import { Backend } from '../services/backend';
 })
 export class Admin {
     backend: Backend;
-    users: any;
+    users: IUser[];
 
     constructor(http: Http, private router: Router) {
         this.backend = new Backend(http);
@@ -38,12 +42,12 @@ export class Admin {
     }
 
     tildelNissebarn(){
-        this.backend.delUtNissebarn().subscribe(response => {
+        this.backend.delUtNissebarn().subscribe(() => {
             this.hentAlleBrukere();
         });
     }
 
-    toggleLevert(user) {
+    toggleLevert(user: IUser) {
         this.backend.settLevert(user.id, !user.harlevert).subscribe(response => {
             if(response.status === 200) {
                 user.harlevert = !user.harlevert;

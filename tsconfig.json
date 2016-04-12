@@ -1,12 +1,17 @@
 {
     "compilerOptions": {
+        "outDir": "public",
+        "target": "es5",
         "module": "commonjs",
-        "rootDir": "./src",
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
         "sourceMap": true,
-        "target": "ES5"
-    }
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "node",
+        "removeComments": false,
+        "noImplicitAny": true,
+        "suppressImplicitAnyIndexErrors": true
+    },
+    "exclude": [
+        "node_modules"
+    ]
 }
