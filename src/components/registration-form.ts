@@ -32,7 +32,7 @@ import {FormControl, Validators, FormGroup} from "@angular/forms";
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
-                    <p><a [routerLink]="intro">Avbryt</a></p>
+                    <p><a routerLink="/intro">Avbryt</a></p>
                 </div>
             </form>
         </div>
