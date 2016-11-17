@@ -1,7 +1,9 @@
-import {Http, Response, Headers} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
 import {Subscriber} from "rxjs/Subscriber";
 
+@Injectable()
 export class Backend {
     constructor(private http:Http) {
     }

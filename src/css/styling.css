@@ -106,11 +106,11 @@ button:disabled {
     background: #8b8b8b;
 }
 
-.ng-invalid {
+.ng-invalid:not(form) {
     border: 3px solid red;
 }
 
-.ng-valid {
+.ng-valid:not(form) {
     border: 3px solid limegreen;
 }
 

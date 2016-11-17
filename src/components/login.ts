@@ -1,48 +1,45 @@
-import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
-import { Http } from 'angular2/http';
+import { Router } from '@angular/router';
+import {Component} from "@angular/core";
 import { Backend } from "../services/backend";
-import {FORM_DIRECTIVES, NgIf, ControlGroup, Validators, Control} from "angular2/common";
-import {Component, Inject} from "angular2/core";
+import {FormGroup, FormBuilder} from "@angular/forms";
 
 @Component({
     selector: 'nisse-login',
-    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES, NgIf],
+    providers: [Backend],
     template: `
         <img class="image-right hidden-mobile" src="./images/santa.png" />
         <div class="container">
-            <form (submit)="login($event)" [ngFormModel]="loginForm" novaldiate >
+            <form (submit)="login($event)" [formGroup]="loginForm" novaldiate >
                 <p class="form-error" *ngIf="hasError">Ugyldig brukernavn eller passord</p>
                 <div class="blokk-s">
                     <label for="email">Din epost:</label>
-                    <input id="email" ngControl="email" type="text" placeholder="navn@bekk.no" />
+                    <input id="email" formControlName="email" type="text" placeholder="navn@bekk.no" />
                 </div>           
                 <div class="blokk-m">
                     <label for="password">Ditt passord:</label>
-                    <input id="password" ngControl="password" type="password" placeholder="Passord" />
+                    <input id="password" formControlName="password" type="password" placeholder="Passord" />
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!loginForm.valid || isLoggingIn">Logg inn</button>
-                    <a [routerLink]="['/Intro']">Avbryt</a>
+                    <a routerLink="/intro">Avbryt</a>
                 </div>
             </form>
         </div>
     `
 })
 export class Login {
-    backend: Backend;
     hasError: boolean;
     isLoggingIn: boolean;
-    loginForm: ControlGroup;
+    loginForm: FormGroup;
 
-    constructor(@Inject(Http) http: Http, @Inject(Router) private router:Router) {
-        this.backend = new Backend(http);
+    constructor(private router:Router, private backend: Backend, fb: FormBuilder) {
         this.hasError = false;
         this.isLoggingIn = false;
 
-        this.loginForm = new ControlGroup({
-            email: new Control('', Validators.required),
-            password: new Control('', Validators.required)
-        });
+        this.loginForm = fb.group({
+            email: '',
+            password: ''
+        })
     }
 
     login() {

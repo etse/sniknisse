@@ -1,6 +1,5 @@
-import {Component} from 'angular2/core';
-import { Http } from 'angular2/http';
-import { Router } from 'angular2/router';
+import {Component, NgModule} from '@angular/core';
+import { Router } from '@angular/router';
 import {Backend} from '../services/backend';
 
 export interface IUser {
@@ -11,6 +10,7 @@ export interface IUser {
 
 @Component({
     selector: 'nisse-admin',
+    providers: [Backend],
     template: `
         <div class="container">
             <h2>Admin panel</h2>
@@ -19,7 +19,7 @@ export interface IUser {
             </div>
 
             <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
-                <li *ngFor="#user of users" (click)="toggleLevert(user)">
+                <li *ngFor="let user of users" (click)="toggleLevert(user)">
                     <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
                     <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
                     <span>{{user.name}}</span>
@@ -28,12 +28,13 @@ export interface IUser {
         </div>
     `
 })
+@NgModule({
+    imports: [Backend]
+})
 export class Admin {
-    backend: Backend;
     users: IUser[];
 
-    constructor(http: Http, private router: Router) {
-        this.backend = new Backend(http);
+    constructor(private router: Router, private backend: Backend) {
         this.hentAlleBrukere();
     }
 

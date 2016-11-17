@@ -1,9 +1,7 @@
-import {ROUTER_DIRECTIVES, RouterLink} from 'angular2/router';
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
 
 @Component({
 	selector: 'nisse-introduction',
-	directives: [ROUTER_DIRECTIVES],
 	template: `
         <p class="blokk-m">
             Nå begynner vi å nærme oss jul, og ingen ordentlig jul uten en
@@ -30,7 +28,7 @@ import {Component} from "angular2/core";
         </ol>
         
         <div class="text-center">
-            <p><a [routerLink]="['/Login']" class="button-snow knapp-stor">Logg inn</a></p>
+            <p><a routerLink="/login" class="button-snow knapp-stor">Logg inn</a></p>
         </div>
     `
 })

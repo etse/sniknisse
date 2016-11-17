@@ -1,11 +1,11 @@
-import { Router } from 'angular2/router';
-import { Http } from 'angular2/http';
 import { Backend } from "../services/backend";
-import {Component, Inject} from "angular2/core";
-import {ControlGroup, Control} from "angular2/common";
+import {Component} from "@angular/core";
+import {Router} from "@angular/router";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'nisse-profile',
+    providers: [Backend],
     template: `
         <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
@@ -28,10 +28,10 @@ import {ControlGroup, Control} from "angular2/common";
                 </div>
             </div>
             <div>
-                <form (submit)="endreOnske($event)" [ngFormModel]="endreForm" novaldiate >
+                <form (submit)="endreOnske($event)" [formGroup]="endreForm" novaldiate >
                     <div class="blokk-m">
                         <label for="onsker">Din ønskeliste:</label>
-                        <textarea id="onsker" ngControl="onsker" [value]="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                        <textarea id="onsker" formControlName="onsker" [value]="onsker" placeholder="Her kan du komme med tips..."></textarea>
                     </div>
                     <div class="text-center container-inline">
                         <button class="knapp-submit" type="submit" [disabled]="!endreForm.valid">Lagre</button>
@@ -42,22 +42,20 @@ import {ControlGroup, Control} from "angular2/common";
     `
 })
 export class Profile {
-    backend: Backend;
     showSpinner: boolean;
-    endreForm: ControlGroup;
+    endreForm: FormGroup;
     nissebarn: any;
     onsker: string;
 
-    constructor(@Inject(Http) http: Http, private router: Router) {
-        this.backend = new Backend(http);
+    constructor(private router: Router, private backend: Backend) {
         this.showSpinner = true;
 
         if (!this.backend.isLoggedIn()) {
             router.navigate(['/Login']);
         }
 
-        this.endreForm = new ControlGroup({
-            onsker: new Control('')
+        this.endreForm = new FormGroup({
+            onsker: new FormControl('')
         });
 
         this.backend.getNissebarn().subscribe(response => {
@@ -74,7 +72,7 @@ export class Profile {
                 router.navigate(['/Login']);
             } else if(response.status === 200) {
                 this.onsker = response.json()['onsker'];
-                this.endreForm.controls['onsker'].updateValueAndValidity();           
+                this.endreForm['onsker'].updateValueAndValidity();
             }
         });
     }
@@ -88,7 +86,7 @@ export class Profile {
     }
 
     endreOnske() {
-        let onsker = this.endreForm.controls['onsker'].value;
+        let onsker = this.endreForm['onsker'].value;
         if(onsker != "") {
             this.backend.updateOnsker(onsker).subscribe(response => {
                 if (response.status === 403) {

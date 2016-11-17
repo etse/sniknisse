@@ -1,58 +1,54 @@
-///<reference path="../../node_modules/angular2/src/common/forms/directives.d.ts"/>
-import { Http } from 'angular2/http';
-import { ROUTER_DIRECTIVES, Router } from 'angular2/router';
+import { Router } from '@angular/router';
 import { Backend } from '../services/backend';
-import {FORM_DIRECTIVES, ControlGroup, Validators, Control} from "angular2/common";
-import {Component} from "angular2/core";
+import {Component} from "@angular/core";
+import {FormControl, Validators, FormGroup} from "@angular/forms";
 
 @Component({
     selector: 'nisse-registration-form',
-    directives: [FORM_DIRECTIVES, ROUTER_DIRECTIVES],
+    providers: [Backend],
     template: `
         <div class="container">
             <img class="image-right hidden-mobile" src="./images/santa.png" />
-            <form (submit)="register($event)" [ngFormModel]="registerForm" novaldiate >
+            <form (submit)="register($event)" [formGroup]="registerForm" novaldiate >
                 <div class="blokk-s">
                     <label for="name">Ditt navn:</label>
-                    <input id="name" ngControl="name" type="text" placeholder="Ditt navn" />
+                    <input id="name" formControlName="name" type="text" placeholder="Ditt navn" />
                 </div>
                 <div class="blokk-s">
                     <label for="email">Din epost:</label>
-                    <input id="email" ngControl="email" type="text" placeholder="navn@bekk.no" />
+                    <input id="email" formControlName="email" type="text" placeholder="navn@bekk.no" />
                 </div>            
                 <div class="blokk-s">
                     <label for="password1">Velg et passord:</label>
-                    <input id="password1" ngControl="password1" type="password" placeholder="Passord" />
+                    <input id="password1" formControlName="password1" type="password" placeholder="Passord" />
                 </div>
                 <div class="blokk-s">
                     <label for="password2">Gjenta passordet:</label>
-                    <input id="password2" ngControl="password2" type="password" placeholder="Gjenta passord" />
+                    <input id="password2" formControlName="password2" type="password" placeholder="Gjenta passord" />
                 </div>
                 <div class="blokk-m">
                     <label for="onsker">Tips til sniknissen:</label>
-                    <textarea id="onsker" ngControl="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                    <textarea id="onsker" formControlName="onsker" placeholder="Her kan du komme med tips..."></textarea>
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
-                    <p><a [routerLink]="['/Intro']">Avbryt</a></p>
+                    <p><a [routerLink]="intro">Avbryt</a></p>
                 </div>
             </form>
         </div>
     `
 })
 export class RegistrationForm {
-    backend: Backend;
-    registerForm: ControlGroup;
+    registerForm: FormGroup;
     
-    constructor(http: Http, private router: Router) {
-        this.backend = new Backend(http);
-        
-        this.registerForm = new ControlGroup({
-            name: new Control('', Validators.required),
-            email: new Control('', Validators.required),
-            password1: new Control('', Validators.required),
-            password2: new Control('', Validators.required),
-            onsker: new Control('')
+    constructor(private router: Router, private backend: Backend) {
+
+        this.registerForm = new FormGroup({
+            name: new FormControl('', Validators.required),
+            email: new FormControl('', Validators.required),
+            password1: new FormControl('', Validators.required),
+            password2: new FormControl('', Validators.required),
+            onsker: new FormControl('')
         });
         
         this.registerForm.controls['password1'].valueChanges.subscribe((value) => this.checkPasswordsEqual());

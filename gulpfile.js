@@ -1,7 +1,7 @@
 const gulp = require('gulp');
 const del = require('del');
 const concat = require('gulp-concat');
-const minify = require('gulp-minify-css');
+const minify = require('gulp-clean-css');
 const tsify = require('tsify');
 const browserify = require('browserify');
 const babelify = require('babelify');
@@ -17,7 +17,9 @@ gulp.task('clean', function () {
 
 gulp.task('build.vendors', function() {
     return gulp.src([
-            'node_modules/angular2/bundles/angular2-polyfills.js',
+            'node_modules/es6-promise/dist/es6-promise.auto.min',
+            'node_modules/core-js/client/shim.min.js',
+            'node_modules/zone.js/dist/zone.js',
             'node_modules/reflect-metadata/Reflect.js'
         ])
         .pipe(concat('vendors.js'))

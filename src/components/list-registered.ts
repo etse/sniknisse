@@ -1,12 +1,9 @@
-import { Component } from 'angular2/core';
-import { Http } from 'angular2/http';
-import { ROUTER_DIRECTIVES } from 'angular2/router';
-import {NgFor} from "angular2/common";
+import { Component } from '@angular/core';
 import { Backend } from '../services/backend';
 
 @Component({
     selector: 'nisse-list-registered',
-    directives: [NgFor, ROUTER_DIRECTIVES],
+    providers: [Backend],
     template: `
         <img class="image-right hidden-mobile" src="./images/christmas-tree.png" />
         <div class="container-inline">
@@ -15,12 +12,12 @@ import { Backend } from '../services/backend';
             </div>
             <h2 class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-l">
-                <li *ngFor="#user of users">{{user.name}}</li>
+                <li *ngFor="let user of users">{{user.name}}</li>
             </ul>
             
             <div class="text-center">
-                <p><a [routerLink]="['/Registration']" class="button-snow knapp-liten">Meld deg på</a></p>
-                <p><a [routerLink]="['/Intro']">Tilbake til forsiden</a></p>
+                <p><a routerLink="/register" class="button-snow knapp-liten">Meld deg på</a></p>
+                <p><a routerLink="/intro">Tilbake til forsiden</a></p>
             </div>
         </div>
     `
@@ -28,13 +25,11 @@ import { Backend } from '../services/backend';
 export class ListRegistered {
     users: any;
     showSpinner: boolean;
-    backend: Backend;
-    
-    constructor(http:Http) {
-        this.backend = new Backend(http);
+
+    constructor(backend: Backend) {
         this.users = [];
         this.showSpinner = true;
-        this.backend.getAllUsers().subscribe(response => {
+        backend.getAllUsers().subscribe(response => {
             if(response.status === 200) {
                 this.users = response.json();
                 this.showSpinner = false;
