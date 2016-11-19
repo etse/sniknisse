@@ -1,5 +1,6 @@
 bower_components/
 *.iml
 .idea/
+.vagrant/
 node_modules/
 static/

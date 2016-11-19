@@ -17,18 +17,26 @@ import {Component} from "@angular/core";
         
         <h2>Prosessen vil skje på følgende måte:</h2>
         <ol class="blokk-xl">
-            <li>Folk melder seg på innen søndag 29. november</li>
-            <li>Mandag 30. november blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>
+            <li>Folk melder seg på innen søndag 27. november</li>
+            <li>Mandag 28. november blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>
             <li>Du logger inn på denne siden og sjekker hvem du er sniknissen til</li>
             <li>Man ordner en gave til en verdi rundt 100-150 kroner</li>
             <li>Pakken skal selvfølgelig pakkes inn, husk å skrive på hvem
                 pakken er til, og sett "sniknissen" i frafeltet</li>
-            <li>Pakkene leveres inn til Steffen senest <strong>onsdag 9. desember</strong>. (Jeg sitter i WT)</li>
-            <li>Utleveringen skjer torsdag 10. desember, etter prosjektlunsjen</li>
+            <li>Pakkene leveres inn senest til lunsj <strong>onsdag 14. desember</strong>
+            	<ul>
+            		<li>Folk i S2/WT leverer til Steffen i WT</li>
+            		<li>Folk på hasle leverer til Knut</li>
+				</ul>
+            
+            </li>
+            <li>Utleveringen skjer onsdag 14. desember</li>
         </ol>
         
         <div class="text-center">
-            <p><a routerLink="/login" class="button-snow knapp-stor">Logg inn</a></p>
+            <p><a routerLink="/register" class="button-snow knapp-stor">Meld deg på</a></p>
+            <p><a routerLink="/login">Logg inn</a></p>
+            <p><a routerLink="/registrerte">Se hvem som har meldt seg på</a></p>
         </div>
     `
 })

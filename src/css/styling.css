@@ -82,7 +82,7 @@ label {
     font-size: 1rem;
 }
 
-input, button, textarea {
+input, button, textarea, select {
     color: #3c3c3c;
     border-radius: 0.5rem;
     padding-left: 0.3rem;
@@ -131,15 +131,11 @@ button:disabled {
         height: 2rem;
     }
     
-    input, button, textarea {
+    input, button, textarea, select {
         width: 20rem;
     }
     
     .container-inline {
         display: inline-block;
-    }
-
-    .container-inline p {
-        margin-right: 200px;
     }
 }

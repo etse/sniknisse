@@ -71,6 +71,7 @@ gulp.task('build', ['clean'], function () {
 gulp.task('watch', ["build"], function() {
     gulp.watch(src + '/**/*.ts', ['build.ts']);
     gulp.watch(src + '/**/*.html', ['build.templates']);
+    gulp.watch(src + '/**/*.css', ['build.css']);
 });
 
 gulp.task('default', ['build']);

@@ -55,5 +55,9 @@
 	
 	.hidden-mobile {
 		display: block;
-	}	
+	}
+
+	.extra-margin {
+		margin-right: 200px;
+	}
 }

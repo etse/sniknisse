@@ -14,13 +14,14 @@ export class Backend {
         return this.http.get('/api/users', {headers: headers});
     }
 
-    public createNewUser(name:String, email:String, password:String, onsker:String):Observable<Response> {
+    public createNewUser(name:String, email:String, lokasjon:String, password:String, onsker:String):Observable<Response> {
         var headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
         var body = JSON.stringify({
             name: name,
             email: email,
+            lokasjon: lokasjon,
             password: password,
             onsker: onsker
         });

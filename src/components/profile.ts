@@ -14,10 +14,9 @@ import {FormControl, FormGroup} from "@angular/forms";
             </div>
 
             <div class="blokk-l">
-                <p *ngIf="!harNissebarn()">
-                    Du har ikke blitt tildelt et nissebarn. Dette er trolig fordi du registrerte
-                    deg etter fristen. Ta kontakt med Steffen, så vil han prøve å få ordnet så
-                    også du kan bli med.
+                <p class="extra-margin" *ngIf="!harNissebarn()">
+                    Du har ikke blitt tildelt et nissebarn enda. Dette er enten fordi fristen
+                    for påmelding ikke enda har utløpt, eller fordi du registrerte deg for sent.
                 </p>
                 <div *ngIf="harNissebarn()">
                     <p>Du har blitt tildelt <em>{{nissebarn.name}}</em> som ditt nissebarn.</p>
@@ -51,7 +50,7 @@ export class Profile {
         this.showSpinner = true;
 
         if (!this.backend.isLoggedIn()) {
-            router.navigate(['/Login']);
+            router.navigate(['login']);
         }
 
         this.endreForm = new FormGroup({
@@ -61,7 +60,7 @@ export class Profile {
         this.backend.getNissebarn().subscribe(response => {
             this.showSpinner = false;
             if(response.status === 403) {
-                router.navigate(['/Login']);
+                router.navigate(['login']);
             } else if (response.status === 200) {
                 this.nissebarn = response.json();
             }
@@ -69,10 +68,10 @@ export class Profile {
 
         this.backend.getOnsker().subscribe(response => {
             if(response.status === 403) {
-                router.navigate(['/Login']);
+                router.navigate(['login']);
             } else if(response.status === 200) {
                 this.onsker = response.json()['onsker'];
-                this.endreForm['onsker'].updateValueAndValidity();
+                this.endreForm.controls['onsker'].updateValueAndValidity();
             }
         });
     }
@@ -86,11 +85,11 @@ export class Profile {
     }
 
     endreOnske() {
-        let onsker = this.endreForm['onsker'].value;
+        let onsker = this.endreForm.controls['onsker'].value;
         if(onsker != "") {
             this.backend.updateOnsker(onsker).subscribe(response => {
                 if (response.status === 403) {
-                    this.router.navigate(['/Login']);
+                    this.router.navigate(['login']);
                 }
             });
         }

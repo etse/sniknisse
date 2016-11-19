@@ -9,7 +9,7 @@ var q = require('q');
 var sessions = {};
 
 function isLoggedInAsAdmin(auth) {
-    return (auth in sessions && sessions[auth].id === 1);
+    return (auth in sessions && sessions[auth].id <= 2);
 }
 
 router.param('userid', function(req, res, next, userid){
@@ -75,20 +75,34 @@ router.post('/nissebarn', function(request, response, error) {
     }
     
     function onHentetAlleBrukere(result) {
-        var shuffeled = shuffle(result.rows);
-        var count = shuffeled.length;
-        var promises = [];
-        for(i=0; i<count; i++) {
-            var deferer = q.defer();
-            db.updateNissebarn(shuffeled[i%count].id, shuffeled[(i+1)%count].id, deferer.resolve, deferer.reject);
-            promises.push(deferer.promise);
-        }
+        var folkHasle = result.rows.filter(function(row) {
+            return row.lokasjon == 2;
+        });
+        var folkS2WT = result.rows.filter(function(row) {
+            return row.lokasjon == 1;
+        });
+
+        var promises = shuffleUsers(folkHasle);
+        promises = promises.concat(shuffleUsers(folkS2WT));
+
         q.all(promises).then(function(){
             response.json({message: "users assigned"});
         }).catch(function(error){
             response.status(500);
             response.message({error: error});
         });
+
+        function shuffleUsers(users) {
+            var shuffeled = shuffle(users);
+            var count = shuffeled.length;
+            var promises = [];
+            for(i=0; i<count; i++) {
+                var deferer = q.defer();
+                db.updateNissebarn(shuffeled[i%count].id, shuffeled[(i+1)%count].id, deferer.resolve, deferer.reject);
+                promises.push(deferer.promise);
+            }
+            return promises;
+        }
     }    
 });
 
@@ -136,7 +150,7 @@ router.post('/login', function(request, response, error) {
 
 router.post('/users', function(request, response, error) {   
     var hashedPassword = hasher.generate(request.body.password);
-    db.createUser(request.body.name, request.body.email, hashedPassword, request.body.onsker, onSuccess, error);
+    db.createUser(request.body.name, request.body.email, hashedPassword, request.body.onsker, request.body.lokasjon, onSuccess, error);
     
     function onSuccess(result) {
         response.json({status: 'OK'});

@@ -17,6 +17,13 @@ import {FormControl, Validators, FormGroup} from "@angular/forms";
                 <div class="blokk-s">
                     <label for="email">Din epost:</label>
                     <input id="email" formControlName="email" type="text" placeholder="navn@bekk.no" />
+                </div>
+                <div class="blokk-s">
+                    <label for="email">Lokasjon:</label>
+                    <select id="lokasjon" formControlName="lokasjon">
+                        <option value="1">S2/WT98</option>
+                        <option value="2">Hasle</option>
+                    </select>
                 </div>            
                 <div class="blokk-s">
                     <label for="password1">Velg et passord:</label>
@@ -46,6 +53,7 @@ export class RegistrationForm {
         this.registerForm = new FormGroup({
             name: new FormControl('', Validators.required),
             email: new FormControl('', Validators.required),
+            lokasjon: new FormControl('', Validators.required),
             password1: new FormControl('', Validators.required),
             password2: new FormControl('', Validators.required),
             onsker: new FormControl('')
@@ -61,9 +69,10 @@ export class RegistrationForm {
             let email = this.registerForm.controls['email'].value;
             let password = this.registerForm.controls['password1'].value;
             let onsker = this.registerForm.controls['onsker'].value;
+            let lokasjon = this.registerForm.controls['lokasjon'].value;
             
-            this.backend.createNewUser(name, email, password, onsker).subscribe(response => {
-                this.router.navigate(['/ListRegistered']);
+            this.backend.createNewUser(name, email, lokasjon, password, onsker).subscribe(response => {
+                this.router.navigate(['registrerte']);
             })
         }
     }

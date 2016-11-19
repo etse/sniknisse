@@ -12,7 +12,7 @@ import { Backend } from '../services/backend';
             </div>
             <h2 class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
             <ul class="blokk-l">
-                <li *ngFor="let user of users">{{user.name}}</li>
+                <li *ngFor="let user of users">{{user.name}} - {{user.lokasjon == 1 ? "S2/WT" : "Hasle"}}</li>
             </ul>
             
             <div class="text-center">

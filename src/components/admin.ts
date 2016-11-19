@@ -53,7 +53,7 @@ export class Admin {
             if(response.status === 200) {
                 user.harlevert = !user.harlevert;
             } else if(response.status === 403) {
-                this.router.navigate(['/Login']);
+                this.router.navigate(['login']);
             }
         });
     }
@@ -64,7 +64,7 @@ export class Admin {
             if(users[0].id != null){
                 this.users = users;
             } else {
-                this.router.navigate(['/Login']);
+                this.router.navigate(['login']);
             }
         });
     }
