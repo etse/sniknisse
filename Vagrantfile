@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
         sudo -u postgres createdb sniknisse
         sudo -u postgres psql -d sniknisse -c "CREATE ROLE nisse WITH PASSWORD 'nisse'"
         sudo -u postgres psql -d sniknisse -c "GRANT ALL PRIVILEGES ON DATABASE sniknisse TO nisse;"
-        sudo -u postgres psql -d sniknisse -c "ALTER ROLE 'nisse' WITH LOGIN;"
+        sudo -u postgres psql -d sniknisse -c "ALTER ROLE nisse WITH LOGIN;"
         export PGPASSWORD=nisse
         psql -U nisse -h 127.0.0.1 -d sniknisse -a -f /vagrant/server/tabledefs.psql
     SHELL

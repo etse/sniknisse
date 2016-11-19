@@ -34,7 +34,7 @@ gulp.task('build.vendors', function() {
 
 gulp.task('build.ts', function(){
     return browserify(src + '/bootstrap.ts', {extensions: [".ts",".js"]})
-        .plugin('tsify', {target: 'es6', typescript: require('typescript')})
+        .plugin('tsify', {target: 'es2015', module: 'es2015', typescript: require('typescript')})
         .transform([
             babelify.configure({extensions: [".ts",".js"], presets: ["es2015"]})
         ])
