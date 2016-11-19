@@ -6,10 +6,14 @@ const tsify = require('tsify');
 const browserify = require('browserify');
 const babelify = require('babelify');
 const source = require('vinyl-source-stream');
+const gulpIf = require('gulp-if');
+const uglify = require('gulp-uglify');
+const buffer = require('vinyl-buffer');
 
 const src = './src';
 const css = src + '/css/*.css';
 const dest = './static';
+const isProduction = process.env.NODE_ENV === 'production';
 
 gulp.task('clean', function () {
     return del('public/**/*');
@@ -23,19 +27,25 @@ gulp.task('build.vendors', function() {
             'node_modules/reflect-metadata/Reflect.js'
         ])
         .pipe(concat('vendors.js'))
+        .pipe(gulpIf(isProduction, buffer()))
+        .pipe(gulpIf(isProduction, uglify()))
         .pipe(gulp.dest(dest))
 });
 
 gulp.task('build.ts', function(){
     return browserify(src + '/bootstrap.ts', {extensions: [".ts",".js"]})
         .plugin('tsify', {target: 'es6', typescript: require('typescript')})
-        .transform(babelify, {extensions: [".ts",".js"], presets: ["es2015"]})
+        .transform([
+            babelify.configure({extensions: [".ts",".js"], presets: ["es2015"]})
+        ])
         .bundle()
         .on('error', function(error){
             console.log("error:", error.message);
             throw error;
         })
         .pipe(source('bundle.js'))
+        .pipe(gulpIf(isProduction, buffer()))
+        .pipe(gulpIf(isProduction, uglify()))
         .pipe(gulp.dest(dest));
 
 });
