@@ -6,8 +6,13 @@ import {Component} from "@angular/core";
         <p class="blokk-m">
             Nå begynner vi å nærme oss jul, og ingen ordentlig jul uten en
             sniknisse. Og i den sammenheng tenkte jeg å ta på meg ansvaret
-            for å arrangere et event for de av oss i BEKK som jobber hos NAV.
+            for å arrangere et event for de av oss som jobber hos NAV.
         </p>
+        <p class="blokk-m">
+        	Nytt av året er at vi sitter på 2 ulike steder; grünerløkka og hasle.
+        	Begge stede vil være med, det vil opperere litt uavhengig - og man vil
+        	få tildelt et nissebarn som er på samme lokasjon.
+		</p>
         <p class="blokk-l">
             Sniknisse er en vestlig tradisjon hvor en gruppe mennesker går
             sammen og avtaler at de skal kjøpe gaver til hverandre. Hvem du
@@ -17,20 +22,18 @@ import {Component} from "@angular/core";
         
         <h2>Prosessen vil skje på følgende måte:</h2>
         <ol class="blokk-xl">
-            <li>Folk melder seg på innen søndag 27. november</li>
-            <li>Mandag 28. november blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>
+            <li>Folk melder seg på innen fredag 25. november 15:00</li>
+            <li>Fredag 25. november klokken 15:00 blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>
             <li>Du logger inn på denne siden og sjekker hvem du er sniknissen til</li>
             <li>Man ordner en gave til en verdi rundt 100-150 kroner</li>
             <li>Pakken skal selvfølgelig pakkes inn, husk å skrive på hvem
                 pakken er til, og sett "sniknissen" i frafeltet</li>
-            <li>Pakkene leveres inn senest til lunsj <strong>onsdag 14. desember</strong>
+            <li>Innlevering av pakker:
             	<ul>
-            		<li>Folk i S2/WT leverer til Steffen i WT</li>
-            		<li>Folk på hasle leverer til Knut</li>
+            		<li>Folk i S2/WT leverer til Steffen i WT senest <strong>før lønsj onsdag 14. desember</strong></li>
+            		<li>Folk på hasle leverer til Knut <strong>innen 1. desember</strong></li>
 				</ul>
-            
             </li>
-            <li>Utleveringen skjer onsdag 14. desember</li>
         </ol>
         
         <div class="text-center">
