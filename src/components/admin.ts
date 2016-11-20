@@ -3,9 +3,10 @@ import { Router } from '@angular/router';
 import {Backend} from '../services/backend';
 
 export interface IUser {
-    id: number,
-    nissebarn: number,
-    harlevert: boolean
+    id: number;
+    nissebarn: number;
+    harlevert: boolean;
+    lokasjon: number;
 }
 
 @Component({
@@ -18,8 +19,20 @@ export interface IUser {
                 <button (click)="tildelNissebarn()">Tildel nissebarn</button>
             </div>
 
+            <div class="blokk-m">
+                <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
+                    <h3>S2/WT</h3>
+                    <li *ngFor="let user of usersS2WT" (click)="toggleLevert(user)">
+                        <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
+                        <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
+                        <span>{{user.name}}</span>
+                    </li> 
+                </ul>
+            </div>
+            
             <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
-                <li *ngFor="let user of users" (click)="toggleLevert(user)">
+                <h3>Hasle</h3>
+                <li *ngFor="let user of usersHasle" (click)="toggleLevert(user)">
                     <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
                     <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
                     <span>{{user.name}}</span>
@@ -32,14 +45,15 @@ export interface IUser {
     imports: [Backend]
 })
 export class Admin {
-    users: IUser[];
+    usersHasle: IUser[];
+    usersS2WT: IUser[];
 
     constructor(private router: Router, private backend: Backend) {
         this.hentAlleBrukere();
     }
 
     harTildeltNissebarn(): boolean {
-        return (this.users != null && this.users[0].nissebarn != null);
+        return (this.usersS2WT != null && this.usersS2WT[0].nissebarn != null);
     }
 
     tildelNissebarn(){
@@ -59,13 +73,15 @@ export class Admin {
     }
 
     private hentAlleBrukere() {
-        this.backend.getAllUsers().subscribe(response => {
-            var users = response.json();
-            if(users[0].id != null){
-                this.users = users;
-            } else {
-                this.router.navigate(['login']);
-            }
-        });
+        this.backend.getAllUsers()
+            .subscribe(response => {
+                const users = response.json() as IUser[];
+                if(users[0].id != null){
+                    this.usersHasle = users.filter(user => user.lokasjon == 2);
+                    this.usersS2WT = users.filter(user => user.lokasjon == 1);
+                } else {
+                    this.router.navigate(['login']);
+                }
+            });
     }
 }
