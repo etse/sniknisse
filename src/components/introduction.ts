@@ -22,8 +22,8 @@ import {Component} from "@angular/core";
         
         <h2>Prosessen vil skje på følgende måte:</h2>
         <ol class="blokk-xl">
-            <li>Folk melder seg på innen fredag 25. november 15:00</li>
-            <li>Fredag 25. november klokken 15:00 blir så tildelt en tilfeldig person du skal kjøpe pakke til</li>
+            <li>Meld deg på innen fredag 25. november klokken 15:00</li>
+            <li>Fredag 25. november klokken 15:00 blir du tildelt en tilfeldig person som du skal kjøpe pakke til</li>
             <li>Du logger inn på denne siden og sjekker hvem du er sniknissen til</li>
             <li>Man ordner en gave til en verdi rundt 100-150 kroner</li>
             <li>Pakken skal selvfølgelig pakkes inn, husk å skrive på hvem
