@@ -18,7 +18,7 @@ import {IUser} from "./admin";
             </ul>
             
             <h2 class="blokk-m">Påmeldte på Hasle ({{usersHasle.length}})</h2>
-            <ul class="blokk-l">
+            <ul class="blokk-xl">
                 <li *ngFor="let user of usersHasle">{{user.name}}</li>
             </ul>
             
