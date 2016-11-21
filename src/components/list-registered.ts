@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Backend } from '../services/backend';
+import {IUser} from "./admin";
 
 @Component({
     selector: 'nisse-list-registered',
@@ -10,9 +11,15 @@ import { Backend } from '../services/backend';
             <div class="text-center blokk-s" *ngIf="showSpinner">
                 <img class="text-center" src='./images/spinner.gif' />
             </div>
-            <h2 class="blokk-m">Vi har {{users.length}} personer påmeldt</h2>
-            <ul class="blokk-l">
-                <li *ngFor="let user of users">{{user.name}} - {{user.lokasjon == 1 ? "S2/WT" : "Hasle"}}</li>
+            
+            <h2 class="blokk-l">Påmeldte på S2/WT ({{usersS2.length}})</h2>
+            <ul class="blokk-xl">
+                <li *ngFor="let user of usersS2">{{user.name}}</li>
+            </ul>
+            
+            <h2 class="blokk-l">Påmeldte på Hasle ({{usersHasle.length}})</h2>
+            <ul class="blokk-xl">
+                <li *ngFor="let user of usersHasle">{{user.name}}</li>
             </ul>
             
             <div class="text-center">
@@ -23,15 +30,17 @@ import { Backend } from '../services/backend';
     `
 })
 export class ListRegistered {
-    users: any;
+    usersS2: IUser[] = [];
+    usersHasle: IUser[] = [];
     showSpinner: boolean;
 
     constructor(backend: Backend) {
-        this.users = [];
         this.showSpinner = true;
         backend.getAllUsers().subscribe(response => {
             if(response.status === 200) {
-                this.users = response.json();
+                const users: IUser[] = response.json();
+                this.usersS2 = users.filter(user => user.lokasjon == 1);
+                this.usersHasle = users.filter(user => user.lokasjon == 2);
                 this.showSpinner = false;
             } else {
                 console.error(response);
