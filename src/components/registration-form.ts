@@ -35,7 +35,7 @@ import {FormControl, Validators, FormGroup} from "@angular/forms";
                 </div>
                 <div class="blokk-m">
                     <label for="onsker">Tips til sniknissen:</label>
-                    <textarea id="onsker" formControlName="onsker" placeholder="Her kan du komme med tips..."></textarea>
+                    <textarea id="onsker" formControlName="onsker" placeholder="Her kan du komme med ønsker til sniknissen."></textarea>
                 </div>
                 <div class="text-center container-inline">
                     <button class="knapp-submit" type="submit" [disabled]="!registerForm.valid">Registrer deg</button>
