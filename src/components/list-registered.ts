@@ -12,13 +12,13 @@ import {IUser} from "./admin";
                 <img class="text-center" src='./images/spinner.gif' />
             </div>
             
-            <h2 class="blokk-l">Påmeldte på S2/WT ({{usersS2.length}})</h2>
-            <ul class="blokk-xl">
+            <h2 class="blokk-m">Påmeldte på S2/WT ({{usersS2.length}})</h2>
+            <ul class="blokk-l">
                 <li *ngFor="let user of usersS2">{{user.name}}</li>
             </ul>
             
-            <h2 class="blokk-l">Påmeldte på Hasle ({{usersHasle.length}})</h2>
-            <ul class="blokk-xl">
+            <h2 class="blokk-m">Påmeldte på Hasle ({{usersHasle.length}})</h2>
+            <ul class="blokk-l">
                 <li *ngFor="let user of usersHasle">{{user.name}}</li>
             </ul>
             
