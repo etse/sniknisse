@@ -4,6 +4,7 @@ import {Backend} from '../services/backend';
 
 export interface IUser {
     id: number;
+    email: string;
     nissebarn: number;
     harlevert: boolean;
     lokasjon: number;
@@ -30,14 +31,24 @@ export interface IUser {
                 </ul>
             </div>
             
-            <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
-                <h3>Hasle</h3>
-                <li *ngFor="let user of usersHasle" (click)="toggleLevert(user)">
-                    <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
-                    <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
-                    <span>{{user.name}}</span>
-                </li> 
-            </ul>
+            <div class="blokk-m">
+                <ul class="liste-klikkbar" *ngIf="harTildeltNissebarn()">
+                    <h3>Hasle</h3>
+                    <li *ngFor="let user of usersHasle" (click)="toggleLevert(user)">
+                        <img *ngIf="user.harlevert" src="./images/checked.png" class="levert-icon" />
+                        <img *ngIf="!user.harlevert" src="./images/cross.png" class="levert-icon" />
+                        <span>{{user.name}}</span>
+                    </li> 
+                </ul>
+            </div>
+           
+            <div>
+                <p>Mailingliste S2/WT:</p>
+                <span *ngFor="let user of usersS2WT">user.email; </span>
+                
+                <p>Mailingliste Hasle:</p>
+                <span *ngFor="let user of usersHasle">user.email; </span>
+            </div>
         </div>
     `
 })
@@ -45,6 +56,7 @@ export interface IUser {
     imports: [Backend]
 })
 export class Admin {
+    users: IUser[];
     usersHasle: IUser[];
     usersS2WT: IUser[];
 
@@ -75,10 +87,10 @@ export class Admin {
     private hentAlleBrukere() {
         this.backend.getAllUsers()
             .subscribe(response => {
-                const users = response.json() as IUser[];
-                if(users[0].id != null){
-                    this.usersHasle = users.filter(user => user.lokasjon == 2);
-                    this.usersS2WT = users.filter(user => user.lokasjon == 1);
+                this.users = response.json() as IUser[];
+                if(this.users[0].id != null){
+                    this.usersHasle = this.users.filter(user => user.lokasjon == 2);
+                    this.usersS2WT = this.users.filter(user => user.lokasjon == 1);
                 } else {
                     this.router.navigate(['login']);
                 }
