@@ -37,8 +37,7 @@ import {Component} from "@angular/core";
         </ol>
         
         <div class="text-center">
-            <p><a routerLink="/register" class="button-snow knapp-stor">Meld deg på</a></p>
-            <p><a routerLink="/login">Logg inn</a></p>
+            <p><a routerLink="/login" class="button-snow knapp-stor">Logg inn</a></p>
             <p><a routerLink="/registrerte">Se hvem som har meldt seg på</a></p>
         </div>
     `
