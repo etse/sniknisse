@@ -44,10 +44,10 @@ export interface IUser {
            
             <div>
                 <p>Mailingliste S2/WT:</p>
-                <span *ngFor="let user of usersS2WT">user.email; </span>
+                <span *ngFor="let user of usersS2WT">{{user.email}}; </span>
                 
                 <p>Mailingliste Hasle:</p>
-                <span *ngFor="let user of usersHasle">user.email; </span>
+                <span *ngFor="let user of usersHasle">{{user.email}}; </span>
             </div>
         </div>
     `
