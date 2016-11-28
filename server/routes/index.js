@@ -96,7 +96,7 @@ router.post('/nissebarn', function(request, response, error) {
             var shuffeled = shuffle(users);
             var count = shuffeled.length;
             var promises = [];
-            for(i=0; i<count; i++) {
+            for(var i=0; i<count; i++) {
                 var deferer = q.defer();
                 db.updateNissebarn(shuffeled[i%count].id, shuffeled[(i+1)%count].id, deferer.resolve, deferer.reject);
                 promises.push(deferer.promise);

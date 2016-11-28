@@ -106,6 +106,12 @@ button:disabled {
     background: #8b8b8b;
 }
 
+.feilmelding {
+    font-style: italic;
+    margin: 0;
+    color: #ffeff5;
+}
+
 .ng-invalid:not(form) {
     border: 3px solid red;
 }

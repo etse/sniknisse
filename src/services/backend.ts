@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, Headers} from "@angular/http";
 import {Observable} from "rxjs/Observable";
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
 import {Subscriber} from "rxjs/Subscriber";
 
 @Injectable()
@@ -70,14 +72,9 @@ export class Backend {
             password: password
         });
 
-        return new Observable<Response>((observer:Subscriber<Response>) => {
-            this.http.post('/api/login', body, {headers: headers}).subscribe(response => {
-                if (response.status === 200) {
-                    localStorage.setItem('auth-token', response.json()['auth-token']);
-                }
-                observer.next(response);
-            });
-        });
+        return this.http.post('/api/login', body, {headers: headers})
+            .map(res => res.json())
+            .do(result => localStorage.setItem('auth-token', result['auth-token']));
     }
 
     private postAuthResource(resourceUrl: string, body: string):Observable<Response> {
