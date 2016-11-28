@@ -132,20 +132,28 @@ router.post('/onsker', function(request, response, error) {
 });
 
 router.post('/login', function(request, response, error) {
-    db.getUser(request.body.email, onSuccess, error);
+    db.getUser(request.body.email.toLowerCase(), onSuccess, error);
     
     function onSuccess(result) {
         if(result.rows.length != 1) {
-            response.status(403);
-            response.json({'error': "Wrong username or password!"});
+            respondWrongCredentials();
         } else {
             var password = request.body.password;
             var hashedPassword = result.rows[0]['password'];
-            var sessionId = hasher.generate(result.rows[0]['id'].toString() + Date.now());
-            sessions[sessionId] = result.rows[0];
-            response.json({'auth-token': sessionId});
+            if(hasher.verify(password, hashedPassword)) {
+                var sessionId = hasher.generate(result.rows[0]['id'].toString() + Date.now());
+                sessions[sessionId] = result.rows[0];
+                response.json({'auth-token': sessionId});
+            } else {
+                respondWrongCredentials();
+            }
         }
-    } 
+    }
+
+    function respondWrongCredentials() {
+        response.status(403);
+        response.json({'error': "Wrong username or password!"});
+    }
 });
 
 router.post('/users', function(request, response, error) {   
