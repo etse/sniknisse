@@ -158,7 +158,7 @@ router.post('/login', function(request, response, error) {
 
 router.post('/users', function(request, response, error) {   
     var hashedPassword = hasher.generate(request.body.password);
-    db.createUser(request.body.name, request.body.email, hashedPassword, request.body.onsker, request.body.lokasjon, onSuccess, error);
+    db.createUser(request.body.name, request.body.email.toLowerCase(), hashedPassword, request.body.onsker, request.body.lokasjon, onSuccess, error);
     
     function onSuccess(result) {
         response.json({status: 'OK'});
