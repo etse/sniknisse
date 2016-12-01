@@ -3,6 +3,8 @@ import { Backend } from '../services/backend';
 import {Component} from "@angular/core";
 import {FormControl, Validators, FormGroup} from "@angular/forms";
 
+declare var ga: any;
+
 @Component({
     selector: 'nisse-registration-form',
     providers: [Backend],
@@ -72,6 +74,7 @@ export class RegistrationForm {
             let lokasjon = this.registerForm.controls['lokasjon'].value;
             
             this.backend.createNewUser(name, email, lokasjon, password, onsker).subscribe(response => {
+                ga('send', 'event', 'registration', 'success');
                 this.router.navigate(['registrerte']);
             })
         }

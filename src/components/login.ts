@@ -2,7 +2,8 @@ import { Router } from '@angular/router';
 import {Component} from "@angular/core";
 import { Backend } from "../services/backend";
 import {FormGroup, FormBuilder} from "@angular/forms";
-import {Response} from "@angular/http";
+
+declare var ga: any;
 
 @Component({
     selector: 'nisse-login',
@@ -49,8 +50,12 @@ export class Login {
             const email = this.loginForm.controls['email'].value;
             const password = this.loginForm.controls['password'].value;
 
-            const onSucces = () => this.router.navigate(['profile']);
+            const onSucces = () => {
+                ga('send', 'event', 'login', 'success');
+                this.router.navigate(['profile']);
+            };
             const onError = () => {
+                ga('send', 'event', 'login', 'failure');
                 this.loginForm.setErrors({
                     credentials: true
                 });

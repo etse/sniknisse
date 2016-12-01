@@ -1,4 +1,8 @@
 import {Component} from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import 'rxjs/add/operator/distinctUntilChanged';
+
+declare var ga: any;
 
 @Component({
 	selector: 'nisse-app',
@@ -10,6 +14,14 @@ import {Component} from '@angular/core';
     `
 })
 export class App {
-	constructor() {
+	constructor(public router: Router) {
+		router.events.distinctUntilChanged((previous: any, current: any) => {
+			if(current instanceof NavigationEnd) {
+				return previous.url === current.url;
+			}
+			return true;
+		}).subscribe((x: any) => {
+			ga('send', 'pageview', x.url);
+		});
 	}
 }
